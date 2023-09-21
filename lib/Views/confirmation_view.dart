@@ -101,7 +101,7 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                       ],
                     )),
                     HorizontalFullWidthButton(
-                      text: 'View Appointment',
+                      text: 'View Appointments',
                       onPressed: () {
                         Navigator.pushNamed(context, MyBookingView.id);
                       },

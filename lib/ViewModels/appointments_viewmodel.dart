@@ -64,6 +64,7 @@ class AppointmentsViewModel extends ChangeNotifier {
   void resetTimeAndDate() {
     _selectedTime = null;
     _selectedDate = null;
+    _timeSlots.clear();
   }
 
   String convertRangeToStartTime(String timeRange) {

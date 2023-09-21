@@ -74,7 +74,7 @@ class BookedItemWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                booking.appointmentDate ?? "NA",
+                "${booking.appointmentDate} & ${booking.appointmentTime}" ,
                 style: TextStyleInventory.regBold,
               ),
             ),

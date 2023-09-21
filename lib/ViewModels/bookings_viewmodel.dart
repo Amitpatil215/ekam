@@ -34,4 +34,10 @@ class BookingsViewModel extends ChangeNotifier {
     }
     return false;
   }
+
+  void addNewBooking(Booking booking) async {
+    List<Booking> tempBookingList = [..._bookingsList];
+    _bookingsList.clear();
+    _bookingsList = [booking, ...tempBookingList];
+  }
 }

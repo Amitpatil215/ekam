@@ -24,9 +24,9 @@ class _SplashViewState extends State<SplashView> {
         .getAppointmentOptions();
     Provider.of<BookingsViewModel>(context, listen: false)
         .getBookingsFromRemote();
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushNamed(context, DocListView.id);
-    });
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   Navigator.pushNamed(context, DocListView.id);
+    // });
     super.initState();
   }
 
@@ -38,29 +38,18 @@ class _SplashViewState extends State<SplashView> {
         children: [
           Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Padding(
-                //   padding: EdgeInsets.only(top: 180, bottom: 35),
-                //   child: Image(
-                //     height: 62,
-                //     width: 204,
-                //     image: AssetImage("images/Logoo.png"),
-                //   ),
-                // ),
-                Text(
-                  "Welcome to My App",
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF055CA7),
-                    fontFamily: "Figtree",
+                Padding(
+                  padding: EdgeInsets.zero,
+                  child: Image(
+                    height: 62,
+                    width: 204,
+                    image: AssetImage("assets/images/logo.png"),
                   ),
                 ),
-                SizedBox(
-                  height: 6,
-                ),
                 Text(
-                  "Loading...",
+                  "Transform Thrive with Ekam",
                   style: TextStyle(
                     fontFamily: kTextFont,
                     fontSize: 20,

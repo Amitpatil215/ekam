@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
+import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/Views/confirmation_view.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/constants/textStyles.dart';
+import 'package:ekam/model/booking.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart'; // for date formatting
@@ -79,6 +83,31 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
                     HorizontalFullWidthButton(
                       text: 'Confirm',
                       onPressed: () {
+                        Provider.of<BookingsViewModel>(context, listen: false)
+                            .addNewBooking(Booking(
+                          appointmentDate: Provider.of<AppointmentsViewModel>(
+                                  context,
+                                  listen: false)
+                              .selectedDate,
+                          appointmentTime: Provider.of<AppointmentsViewModel>(
+                                  context,
+                                  listen: false)
+                              .selectedTime,
+                          bookingId: "CQ${Random().nextInt(100000).toString()}",
+                          doctorName: Provider.of<AppointmentsViewModel>(
+                                  context,
+                                  listen: false)
+                              .selectedDoctor!
+                              .doctorName,
+                          location: Provider.of<AppointmentsViewModel>(context,
+                                  listen: false)
+                              .selectedDoctor!
+                              .location,
+                          image: Provider.of<AppointmentsViewModel>(context,
+                                  listen: false)
+                              .selectedDoctor!
+                              .fallBackUrl,
+                        ));
                         Navigator.pushNamed(context, ConfirmationView.id);
                       },
                     ),

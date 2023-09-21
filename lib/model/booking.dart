@@ -8,12 +8,14 @@ class Booking {
   String? appointmentTime;
   String? image;
 
-  Booking(
-      {this.bookingId,
-      this.doctorName,
-      this.location,
-      this.appointmentDate,
-      this.appointmentTime});
+  Booking({
+    this.bookingId,
+    this.doctorName,
+    this.location,
+    this.appointmentDate,
+    this.appointmentTime,
+    this.image,
+  });
 
   Booking.fromJson(Map<String, dynamic> json) {
     bookingId = json['booking_id'];
