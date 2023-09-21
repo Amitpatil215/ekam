@@ -103,12 +103,20 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                     HorizontalFullWidthButton(
                       text: 'View Appointments',
                       onPressed: () {
+                        Provider.of<AppointmentsViewModel>(context,
+                            listen: false)
+                          ..resetTimeAndDate()
+                          ..resetPackageAndDuration();
                         Navigator.pushNamed(context, MyBookingView.id);
                       },
                     ),
                     EmptyBox.verticalSpaceSmall,
                     TextButton(
                       onPressed: () {
+                        Provider.of<AppointmentsViewModel>(context,
+                            listen: false)
+                          ..resetTimeAndDate()
+                          ..resetPackageAndDuration();
                         Navigator.pushNamedAndRemoveUntil(
                             context, DocListView.id, (route) => false);
                       },

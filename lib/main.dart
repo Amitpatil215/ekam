@@ -4,7 +4,7 @@ import 'package:ekam/Views/booking_view.dart';
 import 'package:ekam/Views/confirmation_view.dart';
 import 'package:ekam/Views/doc_details_view.dart';
 import 'package:ekam/Views/doc_list_view.dart';
-import 'package:ekam/Views/review_summary_view.dart';
+import 'package:ekam/Views/review_summary/review_summary_view.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/Views/splash_view.dart';
 import 'package:flutter/material.dart';

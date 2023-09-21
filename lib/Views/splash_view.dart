@@ -24,9 +24,9 @@ class _SplashViewState extends State<SplashView> {
         .getAppointmentOptions();
     Provider.of<BookingsViewModel>(context, listen: false)
         .getBookingsFromRemote();
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   Navigator.pushNamed(context, DocListView.id);
-    // });
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushNamed(context, DocListView.id);
+    });
     super.initState();
   }
 

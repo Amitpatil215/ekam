@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
-import 'package:ekam/Views/review_summary_view.dart';
+import 'package:ekam/Views/review_summary/review_summary_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/components/toasts.dart';

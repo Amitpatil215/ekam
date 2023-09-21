@@ -4,10 +4,13 @@ import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/Views/confirmation_view.dart';
+import 'package:ekam/Views/review_summary/edit_date_hr_sheet.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
+import 'package:ekam/components/horizontal_picker.dart';
+import 'package:ekam/components/toasts.dart';
 import 'package:ekam/constants/textStyles.dart';
 import 'package:ekam/model/booking.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +30,11 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Review Summary'),
+        title: const Text('Review Summary'),
         centerTitle: true,
       ),
       body: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
@@ -61,24 +64,42 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
                               thickness: 0.5,
                             ),
                             EmptyBox.verticalSpaceMedium,
-                            buildRow('Date & Hour:',
-                                "${appointmentsViewModel.selectedDate} & ${appointmentsViewModel.selectedTime}"),
+                            BuildRow(
+                              title: 'Date & Hour:',
+                              value:
+                                  "${appointmentsViewModel.selectedDate} & ${appointmentsViewModel.selectedTime}",
+                              onTap: () {
+                                editDatHourSheet(context);
+                              },
+                            ),
                             EmptyBox.verticalSpaceMedium,
-                            buildRow(
-                                'Package:',
-                                appointmentsViewModel.selectedPackage ??
+                            BuildRow(
+                                title: 'Package:',
+                                value: appointmentsViewModel.selectedPackage ??
                                     'Not selected'),
                             EmptyBox.verticalSpaceMedium,
-                            buildRow(
-                                'Duration:',
-                                appointmentsViewModel.selectedDuration ??
+                            BuildRow(
+                                title: 'Duration:',
+                                value: appointmentsViewModel.selectedDuration ??
                                     'Not selected'),
                             EmptyBox.verticalSpaceMedium,
-                            buildRow('Booking For:', "Self"),
+                            BuildRow(
+                                title: 'Booking For:',
+                                value: "Self",
+                                isShowEdit: false),
                             EmptyBox.verticalSpaceMedium,
                           ],
                         );
                       }),
+                    ),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          "Tip: You can edit your booking by clicking on the respective field.",
+                        ),
+                      ),
                     ),
                     HorizontalFullWidthButton(
                       text: 'Confirm',
@@ -119,13 +140,35 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
           )),
     );
   }
+}
 
-  Row buildRow(String title, String value) {
+class BuildRow extends StatelessWidget {
+  const BuildRow({
+    this.title = "",
+    this.value = "",
+    this.isShowEdit = true,
+    this.onTap,
+    super.key,
+  });
+  final String title;
+  final String value;
+  final bool isShowEdit;
+  final void Function()? onTap;
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(title, style: TextStyleInventory.reg),
+        Spacer(),
         Text(value, style: TextStyleInventory.regBold),
+        if (isShowEdit) ...[
+          EmptyBox.horizontalSpaceTiny,
+          GestureDetector(
+            onTap: onTap,
+            child: Icon(Icons.edit, size: 16, color: Colors.blue.shade700),
+          )
+        ]
       ],
     );
   }
