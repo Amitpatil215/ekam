@@ -1,4 +1,5 @@
 import 'package:ekam/Helpers/get_random_doc_image.dart';
+import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/doc_details_view.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
@@ -45,6 +46,9 @@ class _DocListViewState extends State<DocListView> {
                     Spacer(),
                     IconButton(
                       onPressed: () {
+                        Provider.of<AppointmentsViewModel>(context,
+                                listen: false)
+                            .setSelectedDoctor(doctor);
                         Navigator.pushNamed(context, DocDetailsView.id,
                             arguments: doctor.doctorName);
                       },
@@ -57,6 +61,8 @@ class _DocListViewState extends State<DocListView> {
                   ],
                 ),
                 onTap: () {
+                  Provider.of<AppointmentsViewModel>(context, listen: false)
+                      .setSelectedDoctor(doctor);
                   Navigator.pushNamed(context, DocDetailsView.id,
                       arguments: doctor.doctorName);
                 },

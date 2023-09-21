@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:ekam/model/doctor.dart';
-import 'package:ekam/network/requests/doc_info_request.dart';
+import 'package:ekam/network/requests/network_request.dart';
 import 'package:flutter/foundation.dart';
 
 class DocDetailsViewModel extends ChangeNotifier {
@@ -16,7 +16,7 @@ class DocDetailsViewModel extends ChangeNotifier {
       return true;
     }
     try {
-      Response response = await DocInfoRequestClient().getDoctorsRequest();
+      Response response = await RequestClient().getDoctorsRequest();
       if (response.statusCode == 200) {
         _doctorsList.clear();
         response.data.forEach((json) {

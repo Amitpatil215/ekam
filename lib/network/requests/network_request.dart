@@ -5,8 +5,8 @@ import '../endpoints.dart';
 import '../interceptors/logger_interceptor.dart';
 import '../network_services/dio_exception.dart';
 
-class DocInfoRequestClient {
-  DocInfoRequestClient()
+class RequestClient {
+  RequestClient()
       : _dio = Dio(
           BaseOptions(
             baseUrl: Endpoints.baseURL,
@@ -34,16 +34,10 @@ class DocInfoRequestClient {
       throw e.toString();
     }
   }
-
-  Future<Response> getClientsRequest() async {
+  Future<Response> getPackageRequest() async {
     try {
-      final response = await _dio.post(
-        "",
-        data: {
-          "key": "CRM",
-          "OperationName": "getClients",
-          "OperationType": "G"
-        },
+      final response = await _dio.get(
+        "/githubforekam/doctor-appointment/appointment_options",
       );
       return response;
     } on DioError catch (err) {
@@ -54,4 +48,20 @@ class DocInfoRequestClient {
       throw e.toString();
     }
   }
+  Future<Response> getBookingRequest() async {
+    try {
+      final response = await _dio.get(
+        "/githubforekam/doctor-appointment/appointments",
+      );
+      return response;
+    } on DioError catch (err) {
+      final errorMessage = DioExceptionHandler.fromDioError(err).toString();
+      throw errorMessage;
+    } catch (e) {
+      if (kDebugMode) print(e);
+      throw e.toString();
+    }
+  }
+
+  
 }

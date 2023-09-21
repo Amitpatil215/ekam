@@ -1,4 +1,5 @@
 import 'package:ekam/Helpers/get_random_doc_image.dart';
+import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/Views/confirmation_view.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
@@ -6,7 +7,8 @@ import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/constants/textStyles.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // for date formatting
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart'; // for date formatting
 
 class ReviewSummaryView extends StatefulWidget {
   static const String id = "ReviewSummaryView";
@@ -17,11 +19,6 @@ class ReviewSummaryView extends StatefulWidget {
 }
 
 class _ReviewSummaryViewState extends State<ReviewSummaryView> {
-  DateTime? _selectedDateTime;
-  String? _selectedDuration;
-  String? _selectedPackage;
-  String? _bookingFor;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,39 +35,46 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          DocInfoCardWidget(
-                            docName: 'Dr. Mukesh Ambani',
-                            docSpeciality: 'Psychiatrist',
-                            docLocation: 'UK, US western street',
-                            fallBackUrl: getRandomDocImage(),
-                            profileUrl: "",
-                          ),
-                          const Divider(
-                            indent: 10,
-                            endIndent: 10,
-                            thickness: 0.5,
-                          ),
-                          EmptyBox.verticalSpaceMedium,
-                          buildRow(
-                              'Date & Hour:',
-                              _selectedDateTime != null
-                                  ? DateFormat('dd/MM/yyyy – kk:mm')
-                                      .format(_selectedDateTime!)
-                                  : 'Not selected'),
-                          EmptyBox.verticalSpaceMedium,
-                          buildRow(
-                              'Package:', _selectedPackage ?? 'Not selected'),
-                          EmptyBox.verticalSpaceMedium,
-                          buildRow(
-                              'Duration:', _selectedDuration ?? 'Not selected'),
-                          EmptyBox.verticalSpaceMedium,
-                          buildRow(
-                              'Booking For:', _bookingFor ?? 'Not selected'),
-                          EmptyBox.verticalSpaceMedium,
-                        ],
-                      ),
+                      child: Consumer<AppointmentsViewModel>(
+                          builder: (context, appointmentsViewModel, _) {
+                        return Column(
+                          children: <Widget>[
+                            DocInfoCardWidget(
+                              docName: appointmentsViewModel
+                                  .selectedDoctor!.doctorName,
+                              docSpeciality: appointmentsViewModel
+                                  .selectedDoctor!.speciality,
+                              docLocation: appointmentsViewModel
+                                  .selectedDoctor!.location,
+                              fallBackUrl: appointmentsViewModel
+                                  .selectedDoctor!.fallBackUrl,
+                              profileUrl: appointmentsViewModel
+                                  .selectedDoctor!.fallBackUrl,
+                            ),
+                            const Divider(
+                              indent: 10,
+                              endIndent: 10,
+                              thickness: 0.5,
+                            ),
+                            EmptyBox.verticalSpaceMedium,
+                            buildRow('Date & Hour:',
+                                "${appointmentsViewModel.selectedDate} & ${appointmentsViewModel.selectedTime}"),
+                            EmptyBox.verticalSpaceMedium,
+                            buildRow(
+                                'Package:',
+                                appointmentsViewModel.selectedPackage ??
+                                    'Not selected'),
+                            EmptyBox.verticalSpaceMedium,
+                            buildRow(
+                                'Duration:',
+                                appointmentsViewModel.selectedDuration ??
+                                    'Not selected'),
+                            EmptyBox.verticalSpaceMedium,
+                            buildRow('Booking For:', "Self"),
+                            EmptyBox.verticalSpaceMedium,
+                          ],
+                        );
+                      }),
                     ),
                     HorizontalFullWidthButton(
                       text: 'Confirm',
@@ -91,7 +95,7 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(title,style: TextStyleInventory.reg),
+        Text(title, style: TextStyleInventory.reg),
         Text(value, style: TextStyleInventory.regBold),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/booking_view.dart';
 import 'package:ekam/Views/confirmation_view.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AppointmentsViewModel()),
         ChangeNotifierProvider(create: (_) => DocDetailsViewModel()),
+        ChangeNotifierProvider(create: (_) => BookingsViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

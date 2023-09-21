@@ -1,3 +1,5 @@
+import 'package:ekam/ViewModels/appointments_viewmodel.dart';
+import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/doc_list_view.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,11 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     // wait for 2 sec and navigate to doc details screen
-    Provider.of<DocDetailsViewModel>(context,listen: false).getDoctors();
+    Provider.of<DocDetailsViewModel>(context, listen: false).getDoctors();
+    Provider.of<AppointmentsViewModel>(context, listen: false)
+        .getAppointmentOptions();
+    Provider.of<BookingsViewModel>(context, listen: false)
+        .getBookingsFromRemote();
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushNamed(context, DocListView.id);
     });
