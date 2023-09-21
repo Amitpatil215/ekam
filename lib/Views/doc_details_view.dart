@@ -1,19 +1,41 @@
 import 'dart:developer';
 
 import 'package:ekam/Helpers/get_random_doc_image.dart';
+import 'package:ekam/ViewModels/appointments_viewmodel.dart';
+import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/components/horizontal_picker.dart';
+import 'package:ekam/components/toasts.dart';
 import 'package:ekam/constants/textStyles.dart';
+import 'package:ekam/model/doctor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class DocDetailsView extends StatelessWidget {
+class DocDetailsView extends StatefulWidget {
   static const String id = "DocDetailsView";
+  final String docName;
+  const DocDetailsView({
+    super.key,
+    required this.docName,
+  });
 
-  const DocDetailsView({super.key});
+  @override
+  State<DocDetailsView> createState() => _DocDetailsViewState();
+}
+
+class _DocDetailsViewState extends State<DocDetailsView> {
+  late Doctor doctor;
+  @override
+  void initState() {
+    doctor = Provider.of<DocDetailsViewModel>(context, listen: false)
+        .getDoctorByName(widget.docName);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,11 +53,11 @@ class DocDetailsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             DocInfoCardWidget(
-              docName: 'Dr. Mukesh Ambani',
-              docSpeciality: 'Psychiatrist',
-              docLocation: 'UK, US western street',
-              fallBackUrl: getRandomDocImage(),
-              profileUrl: "",
+              docName: doctor.doctorName,
+              docSpeciality: doctor.speciality,
+              docLocation: doctor.location,
+              fallBackUrl: doctor.fallBackUrl,
+              profileUrl: doctor.image,
             ),
             const Divider(
               indent: 10,
@@ -43,30 +65,30 @@ class DocDetailsView extends StatelessWidget {
               thickness: 0.5,
             ),
             EmptyBox.verticalSpaceMedium,
-            const Padding(
-              padding: EdgeInsets.all(15.0),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   StatsRowItemWidget(
                     iconData: Icons.people,
                     title: 'Patients',
-                    value: '7,500+',
+                    value: "${doctor.patientsServed.toString()}+",
                   ),
                   StatsRowItemWidget(
                     iconData: Icons.work,
                     title: 'Years Exp.',
-                    value: '10+',
+                    value: "${doctor.yearsOfExperience.toString()}+",
                   ),
                   StatsRowItemWidget(
                     iconData: Icons.star,
                     title: 'Rating',
-                    value: '4.9 +',
+                    value: "${doctor.rating.toString()}+",
                   ),
                   StatsRowItemWidget(
                     iconData: CupertinoIcons.doc_text,
                     title: 'Review',
-                    value: '4956',
+                    value: "${doctor.numberOfReviews.toString()}+",
                   ),
                 ],
               ),
@@ -84,36 +106,70 @@ class DocDetailsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: HorizontalPicker(
-                options: [
-                  "Today \n 4 Oct",
-                  "Monday \n 5 Oct",
-                  "Tuesday \n 6 Oct"
-                ],
-                onPicked: (val) {},
+                options: doctor.availability.keys.toList(),
+                onPicked: (val) {
+                  Provider.of<AppointmentsViewModel>(context, listen: false)
+                      .setSelectedDateAndCurrspondingTime(
+                          val, doctor.availability[val]);
+                },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('Time',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: HorizontalPicker(
-                options: [
-                  "7 PM",
-                  "8 PM",
-                  "9 PM",
-                  "10 PM",
-                  "11 PM",
+            Consumer<AppointmentsViewModel>(
+                builder: (context, appointmentsViewModel, snapshot) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (appointmentsViewModel.selectedDate != null)
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Time',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                    ),
+                  if (appointmentsViewModel.timeSlots.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: HorizontalPicker(
+                        options: appointmentsViewModel.timeSlots,
+                        onPicked: (val) {
+                          Provider.of<AppointmentsViewModel>(context,
+                                  listen: false)
+                              .setSelectedTime(
+                            val,
+                          );
+                        },
+                      ),
+                    ),
+                  if (appointmentsViewModel.timeSlots.isEmpty &&
+                      appointmentsViewModel.selectedDate != null)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text("No slots available for the selected date"),
+                    )
                 ],
-                onPicked: (val) {},
-              ),
-            ),
-            Spacer(),
+              );
+            }),
+            const Spacer(),
             HorizontalFullWidthButton(
               text: 'Book Appointment',
               onPressed: () {
+                // check if date and time is selected
+                if (Provider.of<AppointmentsViewModel>(context, listen: false)
+                        .selectedDate ==
+                    null) {
+                  // show toast
+                  ToastNotifiers.showToast(msg: 'Date not selected');
+                  return;
+                }
+                if (Provider.of<AppointmentsViewModel>(context, listen: false)
+                        .selectedTime ==
+                    null) {
+                  // show toast
+                  ToastNotifiers.showToast(msg: 'Time not selected');
+                  log('Time not selected');
+                  return;
+                }
+
                 Navigator.pushNamed(context, SelectPackageView.id);
               },
             ),

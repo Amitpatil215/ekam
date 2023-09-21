@@ -1,3 +1,4 @@
+import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/booking_view.dart';
 import 'package:ekam/Views/confirmation_view.dart';
 import 'package:ekam/Views/doc_details_view.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppointmentsViewModel()),
+        ChangeNotifierProvider(create: (_) => DocDetailsViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,7 +45,9 @@ class MyApp extends StatelessWidget {
         home: const SplashView(),
         routes: {
           SplashView.id: (context) => const SplashView(),
-          DocDetailsView.id: (context) => const DocDetailsView(),
+          DocDetailsView.id: (context) => DocDetailsView(
+                docName: ModalRoute.of(context)?.settings.arguments as String,
+              ),
           SelectPackageView.id: (context) => const SelectPackageView(),
           ReviewSummaryView.id: (context) => const ReviewSummaryView(),
           ConfirmationView.id: (context) => const ConfirmationView(),

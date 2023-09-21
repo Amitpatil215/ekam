@@ -1,8 +1,11 @@
 import 'package:ekam/Helpers/get_random_doc_image.dart';
+import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/doc_details_view.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
+import 'package:ekam/model/doctor.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DocListView extends StatefulWidget {
   static const String id = "DocListView";
@@ -21,41 +24,47 @@ class _DocListViewState extends State<DocListView> {
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              child: Row(
-                children: [
-                  DocInfoCardWidget(
-                    docName: 'Dr. Mukesh Ambani',
-                    docSpeciality: 'Psychiatrist',
-                    docLocation: 'UK, US western street',
-                    fallBackUrl: getRandomDocImage(),
-                    profileUrl: "",
-                  ),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, DocDetailsView.id);
-                    },
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
+      body: Consumer<DocDetailsViewModel>(
+          builder: (context, docDetailsViewModel, _) {
+        return ListView.builder(
+          itemCount: docDetailsViewModel.doctorsList.length,
+          itemBuilder: (context, index) {
+            Doctor doctor = docDetailsViewModel.doctorsList[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                child: Row(
+                  children: [
+                    DocInfoCardWidget(
+                      docName: doctor.doctorName,
+                      docSpeciality: doctor.speciality,
+                      docLocation: doctor.location,
+                      fallBackUrl: doctor.fallBackUrl,
+                      profileUrl: doctor.image,
                     ),
-                  ),
-                  EmptyBox.horizontalSpaceMedium,
-                ],
+                    Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, DocDetailsView.id,
+                            arguments: doctor.doctorName);
+                      },
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 20,
+                      ),
+                    ),
+                    EmptyBox.horizontalSpaceMedium,
+                  ],
+                ),
+                onTap: () {
+                  Navigator.pushNamed(context, DocDetailsView.id,
+                      arguments: doctor.doctorName);
+                },
               ),
-              onTap: () {
-                Navigator.pushNamed(context, DocDetailsView.id);
-              },
-            ),
-          );
-        },
-      ),
+            );
+          },
+        );
+      }),
     );
   }
 }

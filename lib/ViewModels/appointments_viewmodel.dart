@@ -4,26 +4,39 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class AppointmentsViewModel extends ChangeNotifier {
-  // Future<bool> getClients({bool isRefreshCache = false}) async {
-  //   if (_clientsList.isNotEmpty && !isRefreshCache) {
-  //     return true;
-  //   }
-  //   try {
-  //     Response response = await ConstantsRequestClient().getClientsRequest();
-  //     if (response.statusCode == 200) {
-  //       _clientsList.clear();
-  //       response.data.forEach((json) {
-  //         ClientsModel client = ClientsModel.fromJson(json);
-  //         _clientsList.add(client);
-  //       });
-  //       notifyListeners();
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     log(e.toString());
-  //     return false;
-  //   }
-  // }
+  String? _selectedDate;
+  String? _selectedTime;
+  final List<String> _timeSlots = [];
+
+  //getter
+  String? get selectedDate => _selectedDate;
+  String? get selectedTime => _selectedTime;
+  List<String> get timeSlots => _timeSlots;
+
+  //setter
+  void setSelectedDateAndCurrspondingTime(
+      String date, List<dynamic>? timeSlots) {
+    _timeSlots.clear();
+    _selectedDate = date;
+    timeSlots?.forEach((slot) {
+      _timeSlots.add(convertRangeToStartTime(slot));
+    });
+
+    notifyListeners();
+  }
+
+  void setSelectedTime(String time) {
+    _selectedTime = time;
+    notifyListeners();
+  }
+
+  String convertRangeToStartTime(String timeRange) {
+    List<String> times = timeRange.split(' - ');
+    if (times.length > 1) {
+      return times[0];
+    } else {
+      throw FormatException(
+          'Input should be in the format: "Start Time - End Time"');
+    }
+  }
 }

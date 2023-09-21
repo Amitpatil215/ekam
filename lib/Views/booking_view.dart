@@ -21,6 +21,13 @@ class _MyBookingViewState extends State<MyBookingView> {
       'address': '123 St, City, Country',
       'id': 'BID1234',
     },
+    {
+      'date': 'Aug 25, 2023 - 10:00 AM',
+      'image': 'assets/images/doc_pr_1.jpg',
+      'name': 'Dr. John Doe',
+      'address': '123 St, City, Country',
+      'id': 'BID1234',
+    },
     // Add more bookings here...
   ];
 
@@ -36,7 +43,12 @@ class _MyBookingViewState extends State<MyBookingView> {
         itemBuilder: (context, index) {
           var booking = bookings[index];
 
-          return Card(
+          return Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade300),
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -49,13 +61,14 @@ class _MyBookingViewState extends State<MyBookingView> {
                     ),
                   ),
                   Divider(
-                    indent: 20,
-                    endIndent: 20,
+                    indent: 10,
+                    endIndent: 10,
                     thickness: 0.5,
                   ),
                   Row(
                     children: [
-                      Image.asset(booking['image']!, width: 150, height: 150),
+                      Image.asset(booking['image']!,
+                          width: 115, height: 115, fit: BoxFit.cover),
                       EmptyBox.horizontalSpaceSmall,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,9 +86,10 @@ class _MyBookingViewState extends State<MyBookingView> {
                       ),
                     ],
                   ),
+                  EmptyBox.verticalSpaceSmall,
                   Divider(
-                    indent: 20,
-                    endIndent: 20,
+                    indent: 10,
+                    endIndent: 10,
                     thickness: 0.5,
                   ),
                   EmptyBox.verticalSpaceMedium,
@@ -86,14 +100,14 @@ class _MyBookingViewState extends State<MyBookingView> {
                         text: 'Cancel',
                         backgroundColor: Colors.lightBlueAccent.shade100,
                         textColor: Colors.blue.shade900,
-                        width: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         onPressed: () {
                           Navigator.pushNamed(context, MyBookingView.id);
                         },
                       ),
                       HorizontalCustomWidthButton(
                         text: 'Reschedule',
-                        width: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.35,
                         onPressed: () {
                           Navigator.pushNamed(context, MyBookingView.id);
                         },

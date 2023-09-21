@@ -1,5 +1,7 @@
+import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
 import 'package:ekam/Views/doc_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../constants/font.dart';
 
 class SplashView extends StatefulWidget {
@@ -15,6 +17,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     // wait for 2 sec and navigate to doc details screen
+    Provider.of<DocDetailsViewModel>(context,listen: false).getDoctors();
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushNamed(context, DocListView.id);
     });

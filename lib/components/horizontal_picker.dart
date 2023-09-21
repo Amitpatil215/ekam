@@ -11,7 +11,7 @@ class HorizontalPicker extends StatefulWidget {
 }
 
 class _HorizontalPickerState extends State<HorizontalPicker> {
-  int selectedIndex = 0;
+  int selectedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
