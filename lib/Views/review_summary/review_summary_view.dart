@@ -5,6 +5,8 @@ import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/Views/confirmation_view.dart';
 import 'package:ekam/Views/review_summary/edit_date_hr_sheet.dart';
+import 'package:ekam/Views/review_summary/edit_duration.dart';
+import 'package:ekam/Views/review_summary/edit_package_sheet.dart';
 import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
@@ -74,16 +76,23 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
                             ),
                             EmptyBox.verticalSpaceMedium,
                             BuildRow(
-                                title: 'Package:',
-                                value: appointmentsViewModel.selectedPackage ??
-                                    'Not selected'),
+                              title: 'Package:',
+                              value: appointmentsViewModel.selectedPackage ??
+                                  'Not selected',
+                              onTap: () {
+                                editPackageSheet(context);
+                              },
+                            ),
                             EmptyBox.verticalSpaceMedium,
                             BuildRow(
                                 title: 'Duration:',
                                 value: appointmentsViewModel.selectedDuration ??
-                                    'Not selected'),
+                                    'Not selected',
+                                onTap: () {
+                                  editDurationSheet(context);
+                                }),
                             EmptyBox.verticalSpaceMedium,
-                            BuildRow(
+                            const BuildRow(
                                 title: 'Booking For:',
                                 value: "Self",
                                 isShowEdit: false),
@@ -160,7 +169,7 @@ class BuildRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(title, style: TextStyleInventory.reg),
-        Spacer(),
+        const Spacer(),
         Text(value, style: TextStyleInventory.regBold),
         if (isShowEdit) ...[
           EmptyBox.horizontalSpaceTiny,

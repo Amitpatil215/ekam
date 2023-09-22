@@ -62,6 +62,18 @@ class RequestClient {
       throw e.toString();
     }
   }
-
-  
+  Future<Response> getBookingConfirmationRequest() async {
+    try {
+      final response = await _dio.get(
+        "githubforekam/doctor-appointment/booking_confirmation",
+      );
+      return response;
+    } on DioError catch (err) {
+      final errorMessage = DioExceptionHandler.fromDioError(err).toString();
+      throw errorMessage;
+    } catch (e) {
+      if (kDebugMode) print(e);
+      throw e.toString();
+    }
+  }
 }

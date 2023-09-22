@@ -113,8 +113,9 @@ class _DocDetailsViewState extends State<DocDetailsView> {
                   options: doctor.availability.keys.toList(),
                   onPicked: (val) {
                     Provider.of<AppointmentsViewModel>(context, listen: false)
-                        .setSelectedDateAndCurrspondingTime(
-                            val, doctor.availability[val]);
+                      ..setSelectedTime(null)
+                      ..setSelectedDateAndCurrspondingTime(
+                          val, doctor.availability[val]);
                   },
                 ),
               ),

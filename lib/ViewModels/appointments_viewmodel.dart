@@ -34,7 +34,7 @@ class AppointmentsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedTime(String time) {
+  void setSelectedTime(String? time) {
     _selectedTime = time;
     notifyListeners();
   }
