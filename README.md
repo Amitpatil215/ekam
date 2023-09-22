@@ -48,3 +48,8 @@ Aimed at creating highly scalable app with thought on seperation of concern and 
 3. Run `flutter pub get` to install dependencies.
 4. Run the app using `flutter run`.
 
+## Tech & Tools Used
+- Flutter (Channel stable, 3.13.0)
+- FVM
+- JSON Serializer
+- Postman
