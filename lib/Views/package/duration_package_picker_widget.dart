@@ -32,40 +32,38 @@ class DurationAndPakcage extends StatelessWidget {
                 EmptyBox.verticalSpaceMedium,
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: InputDecorator(
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      )),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: appointmentsViewModel.selectedDuration,
-                          hint: const Text('Select Duration'),
-                          isExpanded: true,
-                          isDense: true,
-                          onChanged: (String? newValue) {
-                            Provider.of<AppointmentsViewModel>(context,
-                                    listen: false)
-                                .setSelectedDuration(newValue);
-                          },
-                          items: appointmentsViewModel
-                              .appointmentOption?.duration
-                              ?.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.access_time,
-                                      color: Colors.blue.shade700),
-                                  EmptyBox.horizontalSpaceTiny,
-                                  Text(value,
-                                      style: TextStyleInventory.regBold),
-                                ],
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                  child: InputDecorator(
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    )),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: appointmentsViewModel.selectedDuration,
+                        hint: const Text('Select Duration'),
+                        isExpanded: true,
+                        isDense: true,
+                        onChanged: (String? newValue) {
+                          Provider.of<AppointmentsViewModel>(context,
+                                  listen: false)
+                              .setSelectedDuration(newValue);
+                        },
+                        items: appointmentsViewModel
+                            .appointmentOption?.duration
+                            ?.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Row(
+                              children: [
+                                Icon(Icons.access_time,
+                                    color: Colors.blue.shade700),
+                                EmptyBox.horizontalSpaceTiny,
+                                Text(value,
+                                    style: TextStyleInventory.regBold),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
