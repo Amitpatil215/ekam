@@ -32,13 +32,13 @@ Aimed at creating highly scalable app with thought on seperation of concern and 
 
 ## Screenshot
 
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/41280592-c292-4dff-9f4c-ceb81a14e020" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/52032972-94a6-4c0b-8fe0-00f014df0e0b" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/1968f194-f2f9-4ae9-bbc0-225302091336" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/5e465057-7943-4475-9468-da32189c5bcd" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/45a6c82d-ce5b-4bb1-9da0-8ad0fef1a0e2" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/4d0e2241-bfbe-4348-8224-1e7c56248371" height="700">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a47be641-1413-4635-a337-7301834ca0dd" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/41280592-c292-4dff-9f4c-ceb81a14e020" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/52032972-94a6-4c0b-8fe0-00f014df0e0b" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/1968f194-f2f9-4ae9-bbc0-225302091336" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/5e465057-7943-4475-9468-da32189c5bcd" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/45a6c82d-ce5b-4bb1-9da0-8ad0fef1a0e2" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/4d0e2241-bfbe-4348-8224-1e7c56248371" height="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a47be641-1413-4635-a337-7301834ca0dd" height="400">
 
 
 ## Installation
