@@ -27,18 +27,18 @@ Aimed at creating highly scalable app with thought on seperation of concern and 
 
 ## Responsiveness Test & Logging
 
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/f5799f31-7553-4a7d-9a71-4306094c5482" alt="HappyFace" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a4d677c0-eb40-4610-93a7-99dfbdb57456" alt="HappyFace" width="400">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/f5799f31-7553-4a7d-9a71-4306094c5482" alt="HappyFace" height="300">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a4d677c0-eb40-4610-93a7-99dfbdb57456" alt="HappyFace" width="500" height="300">
 
 ## Screenshot
 
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/41280592-c292-4dff-9f4c-ceb81a14e020" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/52032972-94a6-4c0b-8fe0-00f014df0e0b" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/1968f194-f2f9-4ae9-bbc0-225302091336" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/5e465057-7943-4475-9468-da32189c5bcd" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/45a6c82d-ce5b-4bb1-9da0-8ad0fef1a0e2" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/4d0e2241-bfbe-4348-8224-1e7c56248371" height="200">
-<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a47be641-1413-4635-a337-7301834ca0dd" height="200">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/41280592-c292-4dff-9f4c-ceb81a14e020" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/52032972-94a6-4c0b-8fe0-00f014df0e0b" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/1968f194-f2f9-4ae9-bbc0-225302091336" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/5e465057-7943-4475-9468-da32189c5bcd" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/45a6c82d-ce5b-4bb1-9da0-8ad0fef1a0e2" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/4d0e2241-bfbe-4348-8224-1e7c56248371" height="700">
+<img src="https://github.com/Amitpatil215/ekam/assets/54329870/a47be641-1413-4635-a337-7301834ca0dd" height="700">
 
 
 ## Installation
