@@ -7,7 +7,7 @@ class HorizontalPicker extends StatefulWidget {
   const HorizontalPicker({required this.options, required this.onPicked});
 
   @override
-  _HorizontalPickerState createState() => _HorizontalPickerState();
+  State<HorizontalPicker> createState() => _HorizontalPickerState();
 }
 
 class _HorizontalPickerState extends State<HorizontalPicker> {
@@ -32,7 +32,8 @@ class _HorizontalPickerState extends State<HorizontalPicker> {
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
-                color: selectedIndex == index ? Colors.blue : Colors.transparent,
+                color:
+                    selectedIndex == index ? Colors.blue : Colors.transparent,
                 border: Border.all(
                   color: Colors.blueGrey.shade100,
                   width: 1.0,

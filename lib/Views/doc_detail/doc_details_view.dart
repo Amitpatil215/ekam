@@ -1,15 +1,14 @@
 import 'dart:developer';
 
-import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
-import 'package:ekam/Views/select_package_view.dart';
+import 'package:ekam/Views/doc_detail/stats_row_widget.dart';
+import 'package:ekam/Views/package/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/components/horizontal_picker.dart';
 import 'package:ekam/components/toasts.dart';
-import 'package:ekam/constants/textStyles.dart';
 import 'package:ekam/model/doctor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -183,41 +182,6 @@ class _DocDetailsViewState extends State<DocDetailsView> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class StatsRowItemWidget extends StatelessWidget {
-  final String title;
-  final String value;
-  final IconData? iconData;
-
-  const StatsRowItemWidget({
-    this.title = '',
-    this.value = '',
-    this.iconData,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        CircleAvatar(
-          radius: 30,
-          child: Icon(
-            iconData,
-            size: 25,
-            color: Colors.blue.shade700,
-          ),
-        ),
-        EmptyBox.verticalSpaceTiny,
-        Text(
-          value,
-          style: TextStyleInventory.regBold.copyWith(color: Colors.blue),
-        ),
-        Text(title),
-      ],
     );
   }
 }

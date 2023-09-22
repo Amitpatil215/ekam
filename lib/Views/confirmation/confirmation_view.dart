@@ -1,8 +1,9 @@
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
-import 'package:ekam/Views/booking_view.dart';
-import 'package:ekam/Views/doc_details_view.dart';
+import 'package:ekam/Views/booking/booking_view.dart';
+import 'package:ekam/Views/confirmation/info_tile_widget.dart';
+import 'package:ekam/Views/doc_detail/doc_details_view.dart';
 import 'package:ekam/Views/doc_list_view.dart';
-import 'package:ekam/Views/select_package_view.dart';
+import 'package:ekam/Views/package/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/constants/textStyles.dart';
@@ -16,7 +17,7 @@ class ConfirmationView extends StatefulWidget {
   const ConfirmationView({Key? key}) : super(key: key);
 
   @override
-  _ConfirmationViewState createState() => _ConfirmationViewState();
+  State<ConfirmationView> createState() => _ConfirmationViewState();
 }
 
 class _ConfirmationViewState extends State<ConfirmationView> {
@@ -133,31 +134,6 @@ class _ConfirmationViewState extends State<ConfirmationView> {
           ],
         )),
       ),
-    );
-  }
-}
-
-class QuickTileInfo extends StatelessWidget {
-  const QuickTileInfo({
-    super.key,
-    required this.title,
-    this.icon,
-  });
-
-  final String title;
-  final IconData? icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: Colors.blue.shade800,
-        ),
-        EmptyBox.horizontalSpaceSmall,
-        Text(title, style: TextStyleInventory.regBold),
-      ],
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:ekam/ViewModels/bookings_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
-import 'package:ekam/Views/booking_view.dart';
-import 'package:ekam/Views/confirmation_view.dart';
-import 'package:ekam/Views/doc_details_view.dart';
+import 'package:ekam/Views/booking/booking_view.dart';
+import 'package:ekam/Views/confirmation/confirmation_view.dart';
+import 'package:ekam/Views/doc_detail/doc_details_view.dart';
 import 'package:ekam/Views/doc_list_view.dart';
 import 'package:ekam/Views/review_summary/review_summary_view.dart';
-import 'package:ekam/Views/select_package_view.dart';
+import 'package:ekam/Views/package/select_package_view.dart';
 import 'package:ekam/Views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

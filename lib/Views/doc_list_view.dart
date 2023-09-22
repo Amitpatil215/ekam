@@ -1,7 +1,7 @@
 import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
-import 'package:ekam/Views/doc_details_view.dart';
+import 'package:ekam/Views/doc_detail/doc_details_view.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/model/doctor.dart';
@@ -13,7 +13,7 @@ class DocListView extends StatefulWidget {
   const DocListView({Key? key}) : super(key: key);
 
   @override
-  _DocListViewState createState() => _DocListViewState();
+  State<DocListView> createState() => _DocListViewState();
 }
 
 class _DocListViewState extends State<DocListView> {
@@ -21,7 +21,7 @@ class _DocListViewState extends State<DocListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
@@ -43,7 +43,7 @@ class _DocListViewState extends State<DocListView> {
                       fallBackUrl: doctor.fallBackUrl,
                       profileUrl: doctor.image,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
                       onPressed: () {
                         Provider.of<AppointmentsViewModel>(context,
@@ -52,7 +52,7 @@ class _DocListViewState extends State<DocListView> {
                         Navigator.pushNamed(context, DocDetailsView.id,
                             arguments: doctor.doctorName);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_forward_ios,
                         size: 20,
                       ),

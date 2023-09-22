@@ -1,55 +1,9 @@
-import 'package:ekam/ViewModels/bookings_viewmodel.dart';
-import 'package:ekam/Views/doc_list_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/empty_boxes.dart';
 import 'package:ekam/components/toasts.dart';
 import 'package:ekam/constants/textStyles.dart';
 import 'package:ekam/model/booking.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-
-class MyBookingView extends StatefulWidget {
-  static const String id = "MyBookingView";
-  const MyBookingView({Key? key}) : super(key: key);
-
-  @override
-  _MyBookingViewState createState() => _MyBookingViewState();
-}
-
-class _MyBookingViewState extends State<MyBookingView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Bookings'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, DocListView.id, (route) => false);
-              },
-              icon: Icon(
-                Icons.home,
-                color: Colors.blue.shade700,
-              ))
-        ],
-      ),
-      body:
-          Consumer<BookingsViewModel>(builder: (context, bookingsViewModel, _) {
-        return ListView.builder(
-          itemCount: bookingsViewModel.bookingsList.length,
-          itemBuilder: (context, index) {
-            Booking booking = bookingsViewModel.bookingsList[index];
-
-            return BookedItemWidget(booking: booking);
-          },
-        );
-      }),
-    );
-  }
-}
 
 class BookedItemWidget extends StatelessWidget {
   const BookedItemWidget({
@@ -62,7 +16,7 @@ class BookedItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(10),
@@ -74,11 +28,11 @@ class BookedItemWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "${booking.appointmentDate} & ${booking.appointmentTime}" ,
+                "${booking.appointmentDate} & ${booking.appointmentTime}",
                 style: TextStyleInventory.regBold,
               ),
             ),
-            Divider(
+            const Divider(
               indent: 10,
               endIndent: 10,
               thickness: 0.5,
@@ -95,7 +49,7 @@ class BookedItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(booking.doctorName ?? "NA",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                     Text(
                       booking.location ?? "NA",
@@ -108,7 +62,7 @@ class BookedItemWidget extends StatelessWidget {
               ],
             ),
             EmptyBox.verticalSpaceSmall,
-            Divider(
+            const Divider(
               indent: 10,
               endIndent: 10,
               thickness: 0.5,

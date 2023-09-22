@@ -1,35 +1,55 @@
 import 'dart:math';
 
-import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/bookings_viewmodel.dart';
-import 'package:ekam/Views/confirmation_view.dart';
+import 'package:ekam/Views/confirmation/confirmation_view.dart';
 import 'package:ekam/Views/review_summary/edit_date_hr_sheet.dart';
 import 'package:ekam/Views/review_summary/edit_duration.dart';
 import 'package:ekam/Views/review_summary/edit_package_sheet.dart';
-import 'package:ekam/Views/select_package_view.dart';
 import 'package:ekam/components/buttons.dart';
 import 'package:ekam/components/doc_info_card_widget.dart';
 import 'package:ekam/components/empty_boxes.dart';
-import 'package:ekam/components/horizontal_picker.dart';
-import 'package:ekam/components/toasts.dart';
 import 'package:ekam/constants/textStyles.dart';
 import 'package:ekam/model/booking.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart'; // for date formatting
+import 'package:provider/provider.dart'; 
 
 class ReviewSummaryView extends StatefulWidget {
   static const String id = "ReviewSummaryView";
   const ReviewSummaryView({Key? key}) : super(key: key);
 
   @override
-  _ReviewSummaryViewState createState() => _ReviewSummaryViewState();
+  State<ReviewSummaryView> createState() => _ReviewSummaryViewState();
 }
 
 class _ReviewSummaryViewState extends State<ReviewSummaryView> {
   @override
   Widget build(BuildContext context) {
+    var horizontalFullWidthButton = HorizontalFullWidthButton(
+      text: 'Confirm',
+      onPressed: () {
+        Provider.of<BookingsViewModel>(context, listen: false)
+            .addNewBooking(Booking(
+          appointmentDate:
+              Provider.of<AppointmentsViewModel>(context, listen: false)
+                  .selectedDate,
+          appointmentTime:
+              Provider.of<AppointmentsViewModel>(context, listen: false)
+                  .selectedTime,
+          bookingId: "CQ${Random().nextInt(100000).toString()}",
+          doctorName: Provider.of<AppointmentsViewModel>(context, listen: false)
+              .selectedDoctor!
+              .doctorName,
+          location: Provider.of<AppointmentsViewModel>(context, listen: false)
+              .selectedDoctor!
+              .location,
+          image: Provider.of<AppointmentsViewModel>(context, listen: false)
+              .selectedDoctor!
+              .fallBackUrl,
+        ));
+        Navigator.pushNamed(context, ConfirmationView.id);
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text('Review Summary'),
@@ -110,37 +130,7 @@ class _ReviewSummaryViewState extends State<ReviewSummaryView> {
                         ),
                       ),
                     ),
-                    HorizontalFullWidthButton(
-                      text: 'Confirm',
-                      onPressed: () {
-                        Provider.of<BookingsViewModel>(context, listen: false)
-                            .addNewBooking(Booking(
-                          appointmentDate: Provider.of<AppointmentsViewModel>(
-                                  context,
-                                  listen: false)
-                              .selectedDate,
-                          appointmentTime: Provider.of<AppointmentsViewModel>(
-                                  context,
-                                  listen: false)
-                              .selectedTime,
-                          bookingId: "CQ${Random().nextInt(100000).toString()}",
-                          doctorName: Provider.of<AppointmentsViewModel>(
-                                  context,
-                                  listen: false)
-                              .selectedDoctor!
-                              .doctorName,
-                          location: Provider.of<AppointmentsViewModel>(context,
-                                  listen: false)
-                              .selectedDoctor!
-                              .location,
-                          image: Provider.of<AppointmentsViewModel>(context,
-                                  listen: false)
-                              .selectedDoctor!
-                              .fallBackUrl,
-                        ));
-                        Navigator.pushNamed(context, ConfirmationView.id);
-                      },
-                    ),
+                    horizontalFullWidthButton,
                     EmptyBox.verticalSpaceMedium
                   ],
                 ),
