@@ -6,12 +6,24 @@ import 'package:ekam/model/doctor.dart';
 import 'package:ekam/network/requests/network_request.dart';
 import 'package:flutter/foundation.dart';
 
+/// This class is used to store the state of the appointments screen
 class AppointmentsViewModel extends ChangeNotifier {
+  /// Selected doctor for the appointment
   Doctor? _selectedDoctor;
+
+  /// Selected date for the appointment
   String? _selectedDate;
+
+  /// Selected time for the appointment
   String? _selectedTime;
+
+  /// Selected duration for the appointment
   String? _selectedDuration;
+
+  /// Selected package for the appointment
   String? _selectedPackage;
+
+  /// List of time slots for the selected date
   final List<String> _timeSlots = [];
 
   //getter
@@ -23,6 +35,9 @@ class AppointmentsViewModel extends ChangeNotifier {
   List<String> get timeSlots => _timeSlots;
 
   //setter
+  /// Sets the selected date and corresponding time slots
+  /// [date] is the selected date
+  /// [timeSlots] is the list of time slots for the selected date
   void setSelectedDateAndCurrspondingTime(
       String date, List<dynamic>? timeSlots) {
     _timeSlots.clear();
@@ -67,6 +82,9 @@ class AppointmentsViewModel extends ChangeNotifier {
     _timeSlots.clear();
   }
 
+  /// Converts the time range to start time
+  /// [timeRange] is the time range
+  /// returns the start time
   String convertRangeToStartTime(String timeRange) {
     List<String> times = timeRange.split(' - ');
     if (times.length > 1) {
@@ -80,6 +98,9 @@ class AppointmentsViewModel extends ChangeNotifier {
   //getter
   AppointmentOption? get appointmentOption => _appointmentOption;
 
+  /// Gets the appointment options
+  /// [isRefreshCache] is used to refresh the cache
+  /// returns true if the request is successful
   Future<bool> getAppointmentOptions({bool isRefreshCache = false}) async {
     if (_appointmentOption != null && !isRefreshCache) {
       return true;

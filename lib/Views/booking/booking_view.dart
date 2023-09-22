@@ -16,6 +16,13 @@ class MyBookingView extends StatefulWidget {
 
 class _MyBookingViewState extends State<MyBookingView> {
   @override
+  void initState() {
+    Provider.of<BookingsViewModel>(context, listen: false)
+        .getBookingsFromRemote();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

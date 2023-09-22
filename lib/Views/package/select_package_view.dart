@@ -14,6 +14,13 @@ class SelectPackageView extends StatefulWidget {
 
 class _SelectPackageViewState extends State<SelectPackageView> {
   @override
+  void initState() {
+    Provider.of<AppointmentsViewModel>(context, listen: false)
+        .getAppointmentOptions();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {

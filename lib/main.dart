@@ -25,23 +25,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      /// Providers are used to store the state of the app
       providers: [
+        /// This provider is used to store the state of the appointments screen
         ChangeNotifierProvider(create: (_) => AppointmentsViewModel()),
+        ///  This provider is used to store the state of the doc details screen
         ChangeNotifierProvider(create: (_) => DocDetailsViewModel()),
+        /// This provider is used to store the state of the bookings screen
         ChangeNotifierProvider(create: (_) => BookingsViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'PH Dignostics App',
+        title: 'Ekam',
         builder: true
             ? null
+
+            /// This widget is used to test the responsiveness of the app
+            /// It is used to test the app on different screen sizes
+            /// It is used only in the debug mode
+            /// To enable it, set the value of builder to true
+            /// To disable it, set the value of builder to false
             : (context, child) => ScreenSizeTest(
                   child: child,
                 ),
         theme: ThemeData(
           fontFamily: kTextFont,
-          // textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-          // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
         home: const SplashView(),
@@ -56,6 +64,8 @@ class MyApp extends StatelessWidget {
           MyBookingView.id: (context) => const MyBookingView(),
           DocListView.id: (context) => const DocListView(),
         },
+
+        /// This method is used to handle the navigation to the unknown routes
         onUnknownRoute: (settings) {
           return MaterialPageRoute(
             builder: (context) => const SplashView(),
