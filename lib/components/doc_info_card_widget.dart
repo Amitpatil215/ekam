@@ -53,7 +53,7 @@ class DocInfoCardWidget extends StatelessWidget {
               EmptyBox.verticalSpaceTiny,
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.location_on,
                     size: 15,
                     color: Colors.blueAccent,

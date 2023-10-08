@@ -11,8 +11,24 @@ class DocDetailsViewModel extends ChangeNotifier {
   /// This list is used to store the list of doctors fetched from the remote server
   final List<Doctor> _doctorsList = [];
 
+  List<Doctor> _filterdDoctorsList = [];
+
   //getter
   List<Doctor> get doctorsList => _doctorsList;
+
+  List<Doctor> get filterdDoctorsList => _filterdDoctorsList;
+
+  void filterDocBySpeciality(String speciality) {
+    _filterdDoctorsList.clear();
+    List<Doctor> dummyFilterDocList = [];
+    _doctorsList.forEach((element) {
+      if (element.speciality == speciality) {
+        dummyFilterDocList.add(element);
+      }
+    });
+    _filterdDoctorsList = [...dummyFilterDocList];
+    notifyListeners();
+  }
 
   /// This method is used to get the doctors from the remote server
   /// [isRefreshCache] is used to refresh the cache
@@ -29,6 +45,7 @@ class DocDetailsViewModel extends ChangeNotifier {
           Doctor client = Doctor.fromJson(json);
           _doctorsList.add(client);
         });
+        _filterdDoctorsList = [..._doctorsList];
         notifyListeners();
         return true;
       } else {
@@ -45,5 +62,13 @@ class DocDetailsViewModel extends ChangeNotifier {
   /// Returns the doctor object
   Doctor getDoctorByName(String docName) {
     return _doctorsList.firstWhere((element) => element.doctorName == docName);
+  }
+
+  List<String> getDoctorSpecialities() {
+    List<String> _allDocSpec = [];
+    _doctorsList.forEach((element) {
+      _allDocSpec.add(element.speciality);
+    });
+    return _allDocSpec;
   }
 }

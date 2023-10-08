@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ekam/Helpers/get_random_doc_image.dart';
 import 'package:ekam/ViewModels/appointments_viewmodel.dart';
 import 'package:ekam/ViewModels/doc_details_viewmodel.dart';
@@ -24,13 +26,37 @@ class _DocListViewState extends State<DocListView> {
         title: const Text('Home'),
         automaticallyImplyLeading: false,
         centerTitle: true,
+        actions: [
+          Consumer<DocDetailsViewModel>(
+              builder: (context, docDetailsViewModel, _) {
+            return PopupMenuButton<String>(
+              icon: const Icon(Icons.filter_alt_outlined),
+              itemBuilder: (context) {
+                return [
+                  ...docDetailsViewModel
+                      .getDoctorSpecialities()
+                      .map((e) => PopupMenuItem<String>(
+                            child: Text(e),
+                            value: e,
+                          ))
+                      .toList(),
+                ];
+              },
+              onSelected: (String speciality) {
+                log("selected $speciality");
+                Provider.of<DocDetailsViewModel>(context, listen: false)
+                    .filterDocBySpeciality(speciality);
+              },
+            );
+          }),
+        ],
       ),
       body: Consumer<DocDetailsViewModel>(
           builder: (context, docDetailsViewModel, _) {
         return ListView.builder(
-          itemCount: docDetailsViewModel.doctorsList.length,
+          itemCount: docDetailsViewModel.filterdDoctorsList.length,
           itemBuilder: (context, index) {
-            Doctor doctor = docDetailsViewModel.doctorsList[index];
+            Doctor doctor = docDetailsViewModel.filterdDoctorsList[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
